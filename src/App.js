@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import './ux.css';
+import {useState} from 'react'
+import Confirm2 from "../hooks/test2";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> thuan dep trai.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function Confirm() {
+    const [input, setInput] = useState('');
+    const {itemsDefault, items, setItems} = Confirm2()
+
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        setInput(e.target.value);
+    }
+
+    const handleAdd = () => {
+        setItems([...items, input]);
+        setInput('');
+    }
+
+    return (
+        <div className='ux-container'>
+            <div className='ux-list'>
+                List: {
+                    [${itemsDefault.join(', ')}]
+                }
+            </div>
+            <div className='ux-item'>
+                <input value={input} onChange={handleChange}/>
+                <button onClick={() => handleAdd()}>Submit</button>
+            </div>
+
+            <div>
+                Add: {input}
+            </div>
+
+            <div className='ux-list'>
+                List: {
+                    [${items.join(', ')}]
+                }
+            </div>
+        </div>
+    )
 }
+
+export default Confirm;
 
 export default App;
